@@ -61,6 +61,27 @@ ggplot(data = yearly_sex_counts,
 ## depicts how the average weight of each species
 ## changes through the years.
 
+yearly_average_weight <- surveys_complete %>% 
+  group_by(year, species_id) %>% 
+  summarize(mean_weight=mean(weight))
+
+## assigning the plot to the name "my_plot" to then save as a .png
+my_plot <- ggplot(data=yearly_average_weight, 
+       aes(x=year, y=mean_weight,
+           color=species_id)) +
+  geom_line()+
+  facet_wrap(~ species_id)+
+  labs(x = "Year",
+       y = "Mean weight (g)") +
+  theme_bw() +
+  theme(axis.text.x = element_text(angle = 90), 
+        legend.position="none")
+
+my_plot
+
+ggsave("my_plot.png", my_plot, width = 15, height = 10) #saving plot to computer
+
+
 
 
 
