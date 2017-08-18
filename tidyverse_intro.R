@@ -115,11 +115,12 @@ species_counts <- surveys_complete %>%
   tally %>%
   filter( n >= 50)
 
-
 ## Only keep the most common species
 
 surveys_comm_spp <- surveys_complete %>%
-  filter(species_id %in% species_counts$species_id)
+  filter(species_id %in% species_counts$species_id) 
+
+## save the surveys_comm_spp dataframe to disk by using write.csv()
 
 write.csv(surveys_comm_spp, file = "data_output/surveys_complete.csv")
   
